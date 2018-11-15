@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (Error(..))
 import Json.Decode as Decode
+import Random
 
 
 
@@ -27,12 +28,15 @@ port toJs : String -> Cmd msg
 type alias Model =
     { counter : Int
     , serverMessage : String
+    , dieFace : Int
+    , value : Int
+    , content : String
     }
 
 
 init : Int -> ( Model, Cmd Msg )
 init flags =
-    ( { counter = flags, serverMessage = "" }, Cmd.none )
+    ( { counter = flags, serverMessage = "", dieFace = 1, value = 1, content = "" }, Cmd.none )
 
 
 
@@ -44,6 +48,14 @@ init flags =
 type Msg
     = Inc
     | Set Int
+    | Roll
+    | NewFace Int
+    | Increment
+    | Decrement
+    | Increment10
+    | Decrement10
+    | Reset
+    | Change String
     | TestServer
     | OnServerResponse (Result Http.Error String)
 
@@ -56,7 +68,45 @@ update message model =
 
         Set m ->
             ( { model | counter = m }, toJs "Hello Js" )
+        Roll ->
+          ( model
+          , Random.generate NewFace (Random.int 1 6)
+          )
 
+        NewFace newFace ->
+          ( Model model.counter model.serverMessage newFace model.value model.content
+          , Cmd.none
+          )
+        Increment ->
+            ({model | value = model.value + 1}
+            , Cmd.none
+            )
+
+        Increment10 ->
+            ({model | value = model.value + 10}
+            , Cmd.none
+            )
+
+        Decrement ->
+            ({model | value = model.value - 1}
+            , Cmd.none
+            )
+
+        Decrement10 ->
+            ({model | value = model.value - 10}
+            , Cmd.none
+            )
+
+
+        Reset ->
+            (Model 0 model.serverMessage  1 1 ""
+            , Cmd.none
+            )
+
+        Change newContent ->
+              ({ model | content = newContent }
+              , Cmd.none
+              )
         TestServer ->
             ( model
             , Http.get "/test" (Decode.field "result" Decode.string)
@@ -113,7 +163,7 @@ view model =
         [ header []
             [ -- img [ src "/images/logo.png" ] []
               span [ class "logo" ] []
-            , h1 [] [ text "Elm 0.19 Webpack Starter, with hot-reloading" ]
+            , h1 [] [ text "sMythic-Labs Starter Website" ]
             ]
         , p [] [ text "Click on the button below to increment the state." ]
         , div [ class "pure-g" ]
@@ -135,10 +185,31 @@ view model =
                 , text model.serverMessage
                 ]
             ]
-        , p [] [ text "Then make a change to the source code and see how the state is retained after you recompile." ]
+        , p [] [ text "" ]
         , p []
-            [ text "And now don't forget to add a star to the Github repo "
+            [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base:"
             , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
+            ]
+        , p []
+            [text "see this sites source code here:"
+            , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
+            ]
+        , div []
+            [ h1 [] [ text "On to the Experiments!" ]
+            , h1 [] [ text (dieImage model.dieFace) ]
+            , button [ onClick Roll ] [ text "Roll" ]
+            , div [] []
+            , button[ onClick Decrement][text "-"]
+            , button[ onClick Decrement10][text "-10"]
+            , div [] [text (String.fromInt model.value)]
+            , button [ onClick Increment] [text "+"]
+            , button[ onClick Increment10][text "+10"]
+            , div[] []
+            , button [ onClick Reset] [text "Reset"]
+            , div []
+              [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+              , div [] [ text (String.reverse model.content) ]
+              ]
             ]
         ]
 
@@ -161,3 +232,14 @@ main =
                 }
         , subscriptions = \_ -> Sub.none
         }
+
+dieImage : Int -> String
+dieImage value =
+    case value of
+        1 -> "⚀"
+        2 -> "⚁"
+        3 -> "⚂"
+        4 -> "⚃"
+        5 -> "⚄"
+        6 -> "⚅"
+        _ -> ""
