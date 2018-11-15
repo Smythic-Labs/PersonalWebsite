@@ -9,6 +9,8 @@ import Http exposing (Error(..))
 import Json.Decode as Decode
 import Random
 
+import Pure --https://package.elm-lang.org/packages/benthepoet/elm-purecss/1.0.3/
+
 
 
 -- ---------------------------
@@ -159,7 +161,9 @@ add1 model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container" ]
+    div [ class "container, pure-g" ] [
+    div [class "pure-u-1-12"] []
+    ,div [class "pure-u-5-6"]
         [ header []
             [ -- img [ src "/images/logo.png" ] []
               span [ class "logo" ] []
@@ -187,31 +191,40 @@ view model =
             ]
         , p [] [ text "" ]
         , p []
-            [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base:"
+            [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base: "
             , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
             ]
         , p []
-            [text "see this sites source code here:"
+            [text "see this sites source code here: "
             , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
             ]
-        , div []
-            [ h1 [] [ text "On to the Experiments!" ]
-            , h1 [] [ text (dieImage model.dieFace) ]
-            , button [ onClick Roll ] [ text "Roll" ]
-            , div [] []
-            , button[ onClick Decrement][text "-"]
-            , button[ onClick Decrement10][text "-10"]
-            , div [] [text (String.fromInt model.value)]
-            , button [ onClick Increment] [text "+"]
-            , button[ onClick Increment10][text "+10"]
-            , div[] []
-            , button [ onClick Reset] [text "Reset"]
+        , div [ class "pure-g"]
+            [ div [class "pure-u-1"][ h1 [] [ text "On to the Experiments!" ] ]
+            , div [class "pure-u-1"][ h1 [] [ text (dieImage model.dieFace) ]]
+            , div [class "pure-u-1"][button [ onClick Roll ] [ text "Roll" ]]
+            ]
+            , br [][]
+        , div [class "pure-g"] [
+                div [class "pure-u-1-6"] [button[ onClick Decrement10][text "-10"]
+                , button[ onClick Decrement][text "-"]
+
+                ]
+                , div [class "pure-u-1-6"] [text (String.fromInt model.value)]
+                , div [class "pure-u-1-6"] [ button [ onClick Increment] [text "+"]
+                , button[ onClick Increment10][text "+10"]
+                ]
+            ]
+            , br [][]
+        ,div [class "pure-g"] [
+             button [ onClick Reset] [text "Reset"]
             , div []
               [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
               , div [] [ text (String.reverse model.content) ]
               ]
             ]
         ]
+        , div [class "pure-u-1-12"] []
+    ]
 
 
 
@@ -227,7 +240,7 @@ main =
         , update = update
         , view =
             \m ->
-                { title = "Elm 0.19 starter"
+                { title = "Welcome to Smythic-Labs"
                 , body = [ view m ]
                 }
         , subscriptions = \_ -> Sub.none
