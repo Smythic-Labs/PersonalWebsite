@@ -161,69 +161,74 @@ add1 model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container, pure-g" ] [
-    div [class "pure-u-1-12"] []
-    ,div [class "pure-u-5-6"]
-        [ header []
-            [ -- img [ src "/images/logo.png" ] []
-              span [ class "logo" ] []
-            , h1 [] [ text "sMythic-Labs Starter Website" ]
-            ]
-        , p [] [ text "Click on the button below to increment the state." ]
-        , div [ class "pure-g" ]
-            [ div [ class "pure-u-1-3" ]
-                [ button
-                    [ class "pure-button pure-button-primary"
-                    , onClick Inc
+    div[][header []
+                      [ -- img [ src "/images/logo.png" ] []
+                        span [ class "logo" ] []
+                      , h1 [] [ text "sMythic-Labs Starter Website" ]
+                      ]
+    ,div [ class "container pure-g mainBody" ] [
+        div [class "pure-u-1-12 navbar"] [text "Nav goes here"]
+        ,div [class "pure-u-5-6"]
+        [
+             p [] [ text "Click on the button below to increment the state." ]
+            , div [ class "pure-g" ]
+                [ div [ class "pure-u-1-3" ]
+                    [ button
+                        [ class "pure-button pure-button-primary"
+                        , onClick Inc
+                        ]
+                        [ text "+ 1" ]
+                    , text <| String.fromInt model.counter
                     ]
-                    [ text "+ 1" ]
-                , text <| String.fromInt model.counter
-                ]
-            , div [ class "pure-u-1-3" ] []
-            , div [ class "pure-u-1-3" ]
-                [ button
-                    [ class "pure-button pure-button-primary"
-                    , onClick TestServer
+                , div [ class "pure-u-1-3" ] []
+                , div [ class "pure-u-1-3" ]
+                    [ button
+                        [ class "pure-button pure-button-primary"
+                        , onClick TestServer
+                        ]
+                        [ text "ping dev server" ]
+                    , text model.serverMessage
                     ]
-                    [ text "ping dev server" ]
-                , text model.serverMessage
                 ]
-            ]
-        , p [] [ text "" ]
-        , p []
-            [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base: "
-            , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
-            ]
-        , p []
-            [text "see this sites source code here: "
-            , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
-            ]
-        , div [ class "pure-g"]
-            [ div [class "pure-u-1"][ h1 [] [ text "On to the Experiments!" ] ]
-            , div [class "pure-u-1"][ h1 [] [ text (dieImage model.dieFace) ]]
-            , div [class "pure-u-1"][button [ onClick Roll ] [ text "Roll" ]]
-            ]
-            , br [][]
-        , div [class "pure-g"] [
-                div [class "pure-u-1-6"] [button[ onClick Decrement10][text "-10"]
-                , button[ onClick Decrement][text "-"]
+            , p [] [ text "" ]
+            , p []
+                [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base: "
+                , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
+                ]
+            , p []
+                [text "see this sites source code here: "
+                , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
+                ]
+            , div [ class "pure-g"]
+                [ div [class "pure-u-1"][ h1 [] [ text "On to the Experiments!" ] ]
+                , div [class "pure-u-1"][ h1 [] [ text (dieImage model.dieFace) ]]
+                , div [class "pure-u-1"][button [ onClick Roll ] [ text "Roll" ]]
+                ]
+                , br [][]
+            , div [class "pure-g"] [
+                    div [class "pure-u-1-6"] [button[ onClick Decrement10][text "-10"]
+                    , button[ onClick Decrement][text "-"]
 
+                    ]
+                    , div [class "pure-u-1-6"] [text (String.fromInt model.value)]
+                    , div [class "pure-u-1-6"] [ button [ onClick Increment] [text "+"]
+                    , button[ onClick Increment10][text "+10"]
+                    ]
                 ]
-                , div [class "pure-u-1-6"] [text (String.fromInt model.value)]
-                , div [class "pure-u-1-6"] [ button [ onClick Increment] [text "+"]
-                , button[ onClick Increment10][text "+10"]
+                , br [][]
+            ,div [class "pure-g"] [
+                 div [class "pure-u-1"] [button [ onClick Reset] [text "Reset"]]
+                , div [class "pure-u-1"]
+                  [ input [ placeholder "Text to reverse", value model.content, onInput Change ] [] ]
+                , div [class "pure-u-1"] [ text (String.reverse model.content)
+                  ]
                 ]
+            ,br [][]
+
             ]
-            , br [][]
-        ,div [class "pure-g"] [
-             div [class "pure-u-1"] [button [ onClick Reset] [text "Reset"]]
-            , div [class "pure-u-1"]
-              [ input [ placeholder "Text to reverse", value model.content, onInput Change ] [] ]
-            , div [class "pure-u-1"] [ text (String.reverse model.content)
-              ]
-            ]
+            ,div [class "pure-u-1-12 rightSidebar"] []
         ]
-        , div [class "pure-u-1-12"] []
+        ,div[][ footer[][text "Copyright Isaac Smyth 2018"]]
     ]
 
 
