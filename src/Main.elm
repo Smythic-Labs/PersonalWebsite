@@ -216,10 +216,10 @@ view model =
             ]
             , br [][]
         ,div [class "pure-g"] [
-             button [ onClick Reset] [text "Reset"]
-            , div []
-              [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-              , div [] [ text (String.reverse model.content) ]
+             div [class "pure-u-1"] [button [ onClick Reset] [text "Reset"]]
+            , div [class "pure-u-1"]
+              [ input [ placeholder "Text to reverse", value model.content, onInput Change ] [] ]
+            , div [class "pure-u-1"] [ text (String.reverse model.content)
               ]
             ]
         ]
