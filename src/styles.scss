@@ -1,48 +1,192 @@
 @import '~purecss/build/pure.css';
+@import '~hamburgers/dist/hamburgers.css';
 
-body {
-    background-color: darkGrey;
-    margin-top: 20px;
-}
+
+$primary-color: #2F4454;
+$secondary-color: #2E151B;
+$button-color: #DA7B93;
+$hoverbutton-color: #376E6f;
+$last-color: #1C3334;
+$link-color: #DA7B93;
+$text-color: white;
 .container {
     margin-left: auto;
     margin-right: auto;
 }
 .mainBody {
-    background-color: lightGrey;
+    background-color: $primary-color;
+}
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: $primary-color;
 }
 
-.navbar{
-    background-color: darkGrey;
+text {
+    color: $text-color;
+}
+h1 {
+    color: $text-color;
+}
+p {
+    color: $text-color;
+}
+a {
+  color: $link-color;
 }
 
-.rightSidebar{
-    background-color: darkGrey;
+.button-increment,
+.button-decrement,
+.button-reset,
+.button-roll {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-header {
-    display: flex;
-    align-items: center;
-    img {
-        width: 60px;
-        margin-right: 30px;
-    }
+.button-increment {
+    background: rgb(28, 184, 65); /* this is a green */
 }
 
-footer{
-    display: flex;
-    align-items: center;
-
+.button-decrement {
+    background: rgb(202, 60, 60); /* this is a maroon */
 }
 
-
-button {
-    margin-right: 15px;
+.button-reset {
+    background: rgb(223, 117, 20); /* this is an orange */
 }
 
-.logo {
-    background: url('images/logo.png');
-    width: 60px;
-    height: 60px;
-    background-size: cover;
+.button-roll {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+/* header */
+
+.header {
+  background-color: $secondary-color;
+  box-shadow: 1px 1px 4px 0 $last-color;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: $secondary-color;
+  float: left
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid $primary-color;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: $primary-color;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: $button-color;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: $button-color;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
 }

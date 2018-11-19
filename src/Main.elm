@@ -161,14 +161,24 @@ add1 model =
 
 view : Model -> Html Msg
 view model =
-    div[][header []
+    --remove this temporarily from css @import '~purecss/build/pure.css';
+    div[class "pure-g container"][header [class "pure-u-1 header"]
                       [ -- img [ src "/images/logo.png" ] []
-                        span [ class "logo" ] []
-                      , h1 [] [ text "sMythic-Labs Starter Website" ]
+                        a [ class "logo", href "" ] [text "sMythic-Labs" ]
+                      --, h1 [] [ text "sMythic-Labs Starter Website" ]
+                      --translated from https://codepen.io/mutedblues/pen/MmPNPG and using sass hamburgers
+                      ,
+                       div [class "", style "float" "right", style "clear" "right"][input [class "menu-btn", type_ "checkbox", id "menu-btn"] []
+                          , label [class "menu-icon", for "menu-btn"][span [class "navicon"][]]
+                          , ul [class "menu"][
+                            li [][a [href "#Test"][text "Test"]]
+                            , li [][a [href "#Test"][text "Test2"]]
+                            , li [][a [href "#Test"][text "Test3"] ]
+                        ]
                       ]
-    ,div [ class "container pure-g mainBody" ] [
-        div [class "pure-u-1-12 navbar"] [text "Nav goes here"]
-        ,div [class "pure-u-5-6"]
+                      ]
+    ,div [ class "pure-u-1 mainBody" ] [
+        div [class "pure-u-11-12"]
         [
              p [] [ text "Click on the button below to increment the state." ]
             , div [ class "pure-g" ]
@@ -202,22 +212,22 @@ view model =
             , div [ class "pure-g"]
                 [ div [class "pure-u-1"][ h1 [] [ text "On to the Experiments!" ] ]
                 , div [class "pure-u-1"][ h1 [] [ text (dieImage model.dieFace) ]]
-                , div [class "pure-u-1"][button [ onClick Roll ] [ text "Roll" ]]
+                , div [class "pure-u-1"][button [class "pure-button button-roll", onClick Roll ] [ text "Roll" ]]
                 ]
                 , br [][]
             , div [class "pure-g"] [
-                    div [class "pure-u-1-6"] [button[ onClick Decrement10][text "-10"]
-                    , button[ onClick Decrement][text "-"]
+                    div [class "pure-u-1-6"] [button[class "pure-button button-decrement", onClick Decrement10][text "-10"]
+                    , button[class "pure-button button-decrement", onClick Decrement][text "-"]
 
                     ]
                     , div [class "pure-u-1-6"] [text (String.fromInt model.value)]
-                    , div [class "pure-u-1-6"] [ button [ onClick Increment] [text "+"]
-                    , button[ onClick Increment10][text "+10"]
+                    , div [class "pure-u-1-6"] [ button [class "pure-button button-increment", onClick Increment] [text "+"]
+                    , button[class "pure-button button-increment", onClick Increment10][text "+10"]
                     ]
                 ]
                 , br [][]
             ,div [class "pure-g"] [
-                 div [class "pure-u-1"] [button [ onClick Reset] [text "Reset"]]
+                 div [class "pure-u-1"] [button [class "pure-button button-reset", onClick Reset] [text "Reset"]]
                 , div [class "pure-u-1"]
                   [ input [ placeholder "Text to reverse", value model.content, onInput Change ] [] ]
                 , div [class "pure-u-1"] [ text (String.reverse model.content)
@@ -226,9 +236,9 @@ view model =
             ,br [][]
 
             ]
-            ,div [class "pure-u-1-12 rightSidebar"] []
+
         ]
-        ,div[][ footer[][text "Copyright Isaac Smyth 2018"]]
+        ,div[class "pure-u-1"][ footer[][text "Copyright Isaac Smyth 2018"]]
     ]
 
 

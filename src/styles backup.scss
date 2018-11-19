@@ -1,0 +1,155 @@
+@import '~purecss/build/pure.css';
+@import '~hamburgers/dist/hamburgers.css';
+
+body {
+    background-color: darkGrey;
+    margin-top: 20px;
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+}
+.mainBody {
+    background-color: lightGrey;
+}
+
+.leftSidebar{
+    background-color: darkGrey;
+}
+
+.rightSidebar{
+    background-color: darkGrey;
+}
+.header .logo {
+    white-space: nowrap;
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 200px;
+  text-decoration: none;
+}
+.header {
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    width: 100%;
+    z-index: 3;
+    img {
+        width: 60px;
+        margin-right: 30px;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: #fff;
+    }
+    li {
+        a {
+          display: block;
+          padding: 20px 20px;
+          border-right: 1px solid #f4f4f4;
+          text-decoration: none;
+        }
+        a:hover,
+        .header .menu-btn:hover {
+          background-color: #f4f4f4;
+        }
+
+    }
+    .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+    }
+    .menu-icon {
+      cursor: pointer;
+      display: inline-block;
+      float: right;
+      padding: 28px 20px;
+      position: relative;
+      user-select: none;
+
+      .navicon {
+        background: #333;
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 18px;
+      }
+      .navicon:before,
+      .header .menu-icon .navicon:after {
+        background: #333;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+      }
+      .navicon:before {
+        top: 5px;
+      }
+      .navicon:after {
+        top: -5px;
+      }
+    }
+}
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+
+footer{
+    display: flex;
+    align-items: center;
+
+}
+
+
+button {
+    margin-right: 15px;
+}
+
