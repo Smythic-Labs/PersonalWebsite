@@ -7,25 +7,20 @@ import Html.Events exposing (..)
 import Model exposing (Model, Msg)
 
 import Experiments
+import Navbar
 
 view : Model -> Html Msg
 view model =
     --remove this temporarily from css @import '~purecss/build/pure.css';
     div[class "pure-g container"][header [class "pure-u-1 header"]
-                      [ -- img [ src "/images/logo.png" ] []
-                        a [ class "logo", href "" ] [text "sMythic-Labs" ]
-                      --, h1 [] [ text "sMythic-Labs Starter Website" ]
-                      --translated from https://codepen.io/mutedblues/pen/MmPNPG and using sass hamburgers
-                      ,
-                       div [class "navbar", style "float" "right", style "clear" "right"][input [class "menu-btn", type_ "checkbox", id "menu-btn"] []
-                          , label [class "menu-icon", for "menu-btn"][span [class "navicon"][]]
-                          , ul [class "menu"][
-                            li [][a [href "#Test"][text "Test"]]
-                            , li [][a [href "#Test"][text "Test2"]]
-                            , li [][a [href "#Test"][text "Test3"] ]
-                        ]
-                      ]
-                      ]
+          [ -- img [ src "/images/logo.png" ] []
+            a [ class "logo", href "" ] [text "sMythic-Labs" ]
+          --, h1 [] [ text "sMythic-Labs Starter Website" ]
+          --translated from https://codepen.io/mutedblues/pen/MmPNPG and using sass hamburgers
+          , Navbar.view model
+
+
+          ]
     ,div [ class "pure-u-1 mainBody" ] [
         div [class "pure-u-11-12"]
         [
