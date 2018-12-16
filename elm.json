@@ -1,7 +1,11 @@
 {
     "type": "application",
     "source-directories": [
-        "src"
+        "src" ,
+        "src/model",
+        "src/update",
+        "src/view",
+        "src/port"
     ],
     "elm-version": "0.19.0",
     "dependencies": {

@@ -21,7 +21,9 @@ body {
   font-family: Helvetica, sans-serif;
   background-color: $primary-color;
 }
-
+div {
+    color: $text-color;
+}
 text {
     color: $text-color;
 }
@@ -33,6 +35,9 @@ p {
 }
 a {
   color: $link-color;
+}
+.navbar a {
+    color: #white
 }
 
 .button-increment,
