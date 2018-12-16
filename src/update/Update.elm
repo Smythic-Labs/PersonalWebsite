@@ -1,7 +1,7 @@
 module Update exposing (update)
 
 import Http exposing (Error(..))
-import Model exposing (Model, Msg)
+import Model exposing (Model, Page, Msg)
 import Port exposing (toJs)
 import Json.Decode as Decode
 import Random
@@ -20,7 +20,7 @@ update message model =
           )
 
         Model.NewFace newFace ->
-          ( Model model.counter model.serverMessage newFace model.value model.content
+          ( Model model.counter model.serverMessage newFace model.value model.content model.page
           , Cmd.none
           )
         Model.Increment ->
@@ -45,7 +45,7 @@ update message model =
 
 
         Model.Reset ->
-            (Model 0 model.serverMessage  1 1 ""
+            (Model 0 model.serverMessage  1 1 "" model.page
             , Cmd.none
             )
 
@@ -66,7 +66,14 @@ update message model =
 
                 Err err ->
                     ( { model | serverMessage = "Error: " ++ httpErrorToString err }, Cmd.none )
-
+        Model.SetPage page ->
+            case page of
+                Model.Index ->
+                    ( { model | page = Model.Index }, Cmd.none )
+                Model.Experiments ->
+                    ( { model | page = Model.Experiments }, Cmd.none )
+                Model.About ->
+                    ( { model | page = Model.About }, Cmd.none )
 
 httpErrorToString : Http.Error -> String
 httpErrorToString err =

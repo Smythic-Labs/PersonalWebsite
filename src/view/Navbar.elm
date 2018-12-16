@@ -11,8 +11,8 @@ view model =
     div [class "navbar", style "float" "right", style "clear" "right"][input [class "menu-btn", type_ "checkbox", id "menu-btn"] []
       , label [class "menu-icon", for "menu-btn"][span [class "navicon"][]]
       , ul [class "menu"][
-        li [][a [href "#Test"][text "Test"]]
-        , li [][a [href "#Test"][text "Test2"]]
-        , li [][a [href "#Test"][text "Test3"] ]
+        li [][a [ onClick (Model.SetPage Index)][text "Index"]]
+        , li [][a [onClick (Model.SetPage Experiments)][text "Experiments"]]
+        , li [][a [onClick (Model.SetPage About)][text "About"] ]
         ]
     ]

@@ -4,10 +4,12 @@ module View exposing (view)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model exposing (Model, Msg)
+import Model exposing (Model, Page, Msg)
 
 import Experiments
 import Navbar
+
+
 
 view : Model -> Html Msg
 view model =
@@ -53,7 +55,13 @@ view model =
                 [text "see this sites source code here: "
                 , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
                 ]
-            , Experiments.view model
+            , case model.page of
+                Model.Index ->
+                    div[][text "index!"]
+                Model.Experiments ->
+                    Experiments.view model
+                Model.About ->
+                    div[][text "about!"]
             ,br [][]
 
             ]
