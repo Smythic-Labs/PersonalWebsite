@@ -18,6 +18,7 @@ view model =
                     ,br[][]
                     ,viewTestPings model
                   , br [][]
+                  ,div[class "pure-u-1"][ footer[][text "Copyright Isaac Smyth 2018"]]
     ]
 
 viewTestPings : Model -> Html Msg

@@ -40,5 +40,6 @@ view model =
             ]
 
         ]
-    ,div[class "pure-u-1"][ footer[][text "Copyright Isaac Smyth 2018"]]
+    ,br[][]
+
     ]
