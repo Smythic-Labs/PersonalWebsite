@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (Model, Page, Msg)
 
+import Index
 import Experiments
 import Navbar
 
@@ -26,38 +27,10 @@ view model =
     ,div [ class "pure-u-1 mainBody" ] [
         div [class "pure-u-11-12"]
         [
-             p [] [ text "Click on the button below to increment the state." ]
-            , div [ class "pure-g" ]
-                [ div [ class "pure-u-1-3" ]
-                    [ button
-                        [ class "pure-button pure-button-primary"
-                        , onClick Model.Inc
-                        ]
-                        [ text "+ 1" ]
-                    , text <| String.fromInt model.counter
-                    ]
-                , div [ class "pure-u-1-3" ] []
-                , div [ class "pure-u-1-3" ]
-                    [ button
-                        [ class "pure-button pure-button-primary"
-                        , onClick Model.TestServer
-                        ]
-                        [ text "ping dev server" ]
-                    , text model.serverMessage
-                    ]
-                ]
-            , p [] [ text "" ]
-            , p []
-                [ text "A Begining website, Mostly just a playground of Elm junk! Using the following Base: "
-                , a [ href "https://github.com/simonh1000/elm-webpack-starter" ] [ text "elm-webpack-starter" ]
-                ]
-            , p []
-                [text "see this sites source code here: "
-                , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [text "TronoTheMerciless GitHub"]
-                ]
-            , case model.page of
+
+            case model.page of
                 Model.Index ->
-                    div[][text "index!"]
+                    Index.view model
                 Model.Experiments ->
                     Experiments.view model
                 Model.About ->
@@ -67,5 +40,5 @@ view model =
             ]
 
         ]
-        ,div[class "pure-u-1"][ footer[][text "Copyright Isaac Smyth 2018"]]
+    ,div[class "pure-u-1"][ footer[][text "Copyright Isaac Smyth 2018"]]
     ]

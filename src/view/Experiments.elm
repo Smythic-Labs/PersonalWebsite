@@ -15,9 +15,34 @@ view model =
                     ]
                     , br [][]
                     , viewIncrements model
+                    ,br[][]
+                    ,viewTestPings model
                   , br [][]
     ]
 
+viewTestPings : Model -> Html Msg
+viewTestPings model =
+    div[][p [] [ text "Click on the button below to increment the state." ]
+                , div [ class "pure-g" ]
+                    [ div [ class "pure-u-1-3" ]
+                        [ button
+                            [ class "pure-button pure-button-primary"
+                            , onClick Model.Inc
+                            ]
+                            [ text "+ 1" ]
+                        , text <| String.fromInt model.counter
+                        ]
+                    , div [ class "pure-u-1-3" ] []
+                    , div [ class "pure-u-1-3" ]
+                        [ button
+                            [ class "pure-button pure-button-primary"
+                            , onClick Model.TestServer
+                            ]
+                            [ text "ping dev server" ]
+                        , text model.serverMessage
+                        ]
+                    ]
+                ]
 
 viewDiceRoll : Model -> Html Msg
 viewDiceRoll model =
