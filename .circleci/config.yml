@@ -1,13 +1,10 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: totallymoney/circleci-elm-compile
         # totallymoney/circleci-elm-compile or andersem/create-elm-app-ci:2.2.0
-#    working_directory: ~/repo
+    working_directory: ~/PersonalWebsite
 
     steps:
       - checkout
@@ -15,17 +12,16 @@ jobs:
       - run: npm run prod
 
 
+
   deploy:
-#    docker:
-#      - image: circleci/python:2.7-jessie
-#    working_directory: ~/circleci-docs
-#    steps:
-#      - run:
-#          name: Install awscli
-#          command: sudo pip install awscli
-#      - run:
-#          name: Deploy to S3
-#          command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+    docker:
+      - image: cibuilds/aws:1.16.43
+    steps:
+      - attach_workspace:
+          at: ./PersonalWebsite
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: aws s3 sync PersonalWebsite/dist s3://smythic-labs.com/ --delete
 
 workflows:
   version: 2
@@ -38,7 +34,3 @@ workflows:
           filters:
             branches:
               only: master
-
-
-
-
