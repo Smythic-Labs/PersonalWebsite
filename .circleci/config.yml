@@ -23,7 +23,9 @@ jobs:
           at: ./PersonalWebsite
       - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync dist s3://smythic-labs.com/ --delete
+          command: |
+            ls
+            aws s3 sync PersonalWebsite/dist s3://smythic-labs.com/ --delete
 
 workflows:
   version: 2
