@@ -27,7 +27,7 @@ jobs:
       - image: cibuilds/aws:1.16.43
     steps:
       - attach_workspace:
-          at: ./PersonalWebsite
+          at: ~/PersonalWebsite
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
