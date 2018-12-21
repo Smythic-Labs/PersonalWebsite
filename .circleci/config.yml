@@ -2,14 +2,19 @@ version: 2
 jobs:
   build:
     docker:
-      - image: totallymoney/circleci-elm-compile
+      - image: tronothemerciless/elm-circleci-webpack
         # totallymoney/circleci-elm-compile or andersem/create-elm-app-ci:2.2.0
     working_directory: ~/PersonalWebsite
-
     steps:
       - checkout
-      - run: npm install
-      - run: npm run prod
+      - run: |
+          ls
+          rm -r elm-stuff
+          npm install
+          npm rebuild
+          npm run prod
+          cd dist
+          ls
 
 
 
