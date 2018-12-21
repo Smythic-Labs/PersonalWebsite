@@ -1,7 +1,7 @@
 version: 2
 refrences:
   workspace_root: &workspace_root
-    /PersonalWebsite
+    ./PersonalWebsite
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
@@ -26,14 +26,13 @@ jobs:
     docker:
       - image: cibuilds/aws:1.16.43
     steps:
-      - *attach_workspace
+      - attach_workspace:
+          at: ./PersonalWebsite
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
             ls
-            cd PersonalWebsite
-            ls
-            aws s3 sync PersonalWebsite/dist s3://smythic-labs.com/ --delete
+            aws s3 sync project/dist s3://smythic-labs.com/ --delete
 
 workflows:
   version: 2
