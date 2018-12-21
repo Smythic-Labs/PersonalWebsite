@@ -1,11 +1,18 @@
 version: 2
+refrences:
+  workspace_root: &workspace_root
+    /PersonalWebsite
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
 jobs:
   build:
     docker:
       - image: tronothemerciless/elm-circleci-webpack
         # totallymoney/circleci-elm-compile or andersem/create-elm-app-ci:2.2.0
-    working_directory: ~/PersonalWebsite
     steps:
+      - *attach_workspace
       - checkout
       - run: |
           rm -rf elm-stuff
@@ -19,8 +26,7 @@ jobs:
     docker:
       - image: cibuilds/aws:1.16.43
     steps:
-      - attach_workspace:
-          at: ./PersonalWebsite
+      - *attach_workspace
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
