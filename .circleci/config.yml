@@ -1,7 +1,7 @@
 version: 2
 refrences:
   workspace_root: &workspace_root
-    ~/PersonalWebsite
+    ~/tmp/PersonalWebsite
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
@@ -21,18 +21,26 @@ jobs:
           npm run prod
           cd dist
           touch DeployTracker
-
+      - run:
+          name: Persist Prod assets
+          command: |
+            set -exu
+            mkdir -p /tmp/PersonalWebsite/dist
+            mv dist/* /tmp/PersonalWebsite/dist/
+      - persist_to_workspace:
+          root: ~/tmp/PersonalWebsite/
+          paths:
+            - dist
   deploy:
     docker:
       - image: cibuilds/aws:1.16.43
     steps:
-      - attach_workspace:
-          at: ~/PersonalWebsite
+      - *attach_workspace
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
             ls
-            aws s3 sync project/dist s3://smythic-labs.com/ --delete
+            aws s3 sync ~/tmp/PersonalWebsite/dist s3://smythic-labs.com/ --delete
 
 workflows:
   version: 2
