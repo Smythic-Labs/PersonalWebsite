@@ -9,6 +9,8 @@ import Model exposing (Model, Page, Msg)
 import Index
 import Experiments
 import Navbar
+import Resume
+import About
 
 
 
@@ -34,7 +36,9 @@ view model =
                 Model.Experiments ->
                     Experiments.view model
                 Model.About ->
-                    div[][text "about!"]
+                    About.view model
+                Model.Resume ->
+                    Resume.view model
             ,br [][]
 
             ]

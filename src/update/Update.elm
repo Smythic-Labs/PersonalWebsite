@@ -74,6 +74,8 @@ update message model =
                     ( { model | page = Model.Experiments }, Cmd.none )
                 Model.About ->
                     ( { model | page = Model.About }, Cmd.none )
+                Model.Resume ->
+                    ( { model | page = Model.Resume }, Cmd.none )
 
 httpErrorToString : Http.Error -> String
 httpErrorToString err =

@@ -1,7 +1,7 @@
 {
     "type": "application",
     "source-directories": [
-        "src" ,
+        "src",
         "src/model",
         "src/update",
         "src/view",
@@ -10,6 +10,7 @@
     "elm-version": "0.19.0",
     "dependencies": {
         "direct": {
+            "alex-tan/elm-dialog": "1.0.0",
             "benthepoet/elm-purecss": "1.0.3",
             "elm/browser": "1.0.0",
             "elm/core": "1.0.0",
@@ -21,7 +22,8 @@
         },
         "indirect": {
             "elm/time": "1.0.0",
-            "elm/virtual-dom": "1.0.0"
+            "elm/virtual-dom": "1.0.0",
+            "etaque/elm-response": "3.1.0"
         }
     },
     "test-dependencies": {

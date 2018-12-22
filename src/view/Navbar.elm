@@ -14,5 +14,6 @@ view model =
         li [][a [ onClick (Model.SetPage Index)][text "Index"]]
         , li [][a [onClick (Model.SetPage Experiments)][text "Experiments"]]
         , li [][a [onClick (Model.SetPage About)][text "About"] ]
+        , li [][a [onClick (Model.SetPage Resume)][text "Resume"] ]
         ]
     ]

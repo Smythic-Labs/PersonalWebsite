@@ -25,6 +25,7 @@ type Page
     = Index
     | Experiments
     | About
+    | Resume
 
 type alias Model =
     { counter : Int

@@ -39,21 +39,29 @@ a {
 .navbar a {
     color: #white
 }
+.gitHubLogo {
+    width: 100px
+}
 
 footer {
     position:absolute;
     bottom:0;
 }
 
+input {
+  color: $secondary-color;
+}
+
 .iframe-container {
   overflow: hidden;
-  padding-top: 56.25%;
+  padding-top: 47%;
   position: relative;
 }
 
 .iframe-container iframe {
    border: 0;
    height: 100%;
+   overflow: hidden;
    left: 0;
    position: absolute;
    top: 0;
