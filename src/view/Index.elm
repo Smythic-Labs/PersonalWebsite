@@ -19,5 +19,6 @@ view model =
                 [text "see this sites source code here: "
                 , a [href "https://github.com/TronoTheMerciless/PersonalWebsite"] [img [class "gitHubLogo", src "/images/GitHub_Logo.png" ] []]
                 ]
-
+            , p []
+                [text "Continuous integration pipeline by circleci current status: ", img [src "https://circleci.com/gh/TronoTheMerciless/PersonalWebsite.svg?style=svg"][]]
     ]
